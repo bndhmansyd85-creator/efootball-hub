@@ -5,17 +5,10 @@ const cheerio = require("cheerio");
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json());app.use(express.static('public'));
 
-// إضافة مسار الصفحة الرئيسية لحل خطأ Cannot GET /
-app.get("/", (req, res) => {
-  res.status(200).send(`
-    <div style="text-align: center; font-family: sans-serif; padding: 50px;">
-      <h1>⚽ eFootball Hub API Ready</h1>
-      <p>السيرفر يعمل بنجاح بدون مشاكل!</p>
-    </div>
-  `);
-});
+
+
 
 const SOURCES = [
   { type: "news", url: "https://www.konami.com/efootball/en/" },
