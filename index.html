@@ -1,0 +1,19 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>eFootball Hub Auto</title><style>
+body{margin:0;background:#06111b;color:#fff;font-family:system-ui,Tahoma}.app{max-width:680px;margin:auto;padding:18px}.hero,.card{background:#0b1b2a;border:1px solid #284257;border-radius:20px;padding:17px;margin:10px 0}.hero{background:linear-gradient(135deg,#123a59,#091824)}h1{margin:6px 0}.muted{color:#91a5b5;font-size:13px}.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:#143a56;color:#90d9ff;font-size:12px}.btn{width:100%;border:0;border-radius:13px;padding:13px;font-weight:800;margin-top:10px}.news{margin-top:10px}.news a{color:#90d9ff}.error{color:#ff9b9b}
+</style></head><body><main class="app">
+<section class="hero"><span class="tag">⚡ AUTO</span><h1>eFootball Hub</h1><p class="muted">الأخبار والصيانة والبكجات من مصادر KONAMI الرسمية.</p></section>
+<button class="btn" onclick="loadNews()">🔄 تحديث الأخبار الآن</button><p id="status" class="muted">جارٍ الاتصال...</p><section id="feed"></section>
+<script>
+const API=(localStorage.getItem("efootball_api")||"").replace(/\/$/,"");
+async function loadNews(){
+ const s=document.getElementById("status"); const f=document.getElementById("feed");
+ if(!API){s.innerHTML='<span class="error">ضع رابط الخادم أولاً في localStorage باسم efootball_api.</span>';return}
+ s.textContent="جارٍ جلب آخر الأخبار...";
+ try{
+  const r=await fetch(API+"/api/news"); if(!r.ok)throw Error("HTTP "+r.status);
+  const d=await r.json(); f.innerHTML="";
+  (d.items||[]).forEach(x=>{let c=document.createElement("article");c.className="card news";c.innerHTML='<span class="tag">'+(x.type==="maintenance"?"🛠️ صيانة":"📰 خبر")+'</span><h3></h3><a target="_blank">فتح الخبر الرسمي ↗</a>';c.querySelector("h3").textContent=x.title;c.querySelector("a").href=x.url;f.appendChild(c)});
+  s.textContent="آخر فحص: "+new Date(d.updatedAt).toLocaleString("ar-YE");
+ }catch(e){s.innerHTML='<span class="error">تعذر الاتصال بالخادم: '+e.message+"</span>"}
+}
+</script></main></body></html>
