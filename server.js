@@ -5,19 +5,12 @@ const cheerio = require("cheerio");
 
 const app = express();
 app.use(cors());
-app.use(express.json());app.use(express.static('public'));
+app.use(express.json());app.use(express.static('public'));app.use(express.static('public'));
 
 
 
 
-const SOURCES = [
-  { type: "news", url: "https://www.konami.com/efootball/en/" },
-  { type: "news_ar", url: "https://www.konami.com/efootball/ar/" }
-];
 
-let cache = { updatedAt: null, items: [] };
-
-async function fetchSource(source) {
   const r = await fetch(source.url, { headers: { "User-Agent": "Mozilla/5.0" } });
   if (!r.ok) throw new Error(`HTTP ${r.status}`);
   const html = await r.text();
