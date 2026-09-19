@@ -3,106 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#08111f">
-<title>eFootball Hub V4</title>
+<meta name="theme-color" content="#071321">
+<title>eFootball Hub V5</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial;background:#07111f;color:#f5f7fb}
-a{text-decoration:none;color:inherit}.wrap{max-width:760px;margin:auto;padding:18px 14px 90px}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.brand{display:flex;align-items:center;gap:10px}.logo{width:52px;height:52px;border-radius:16px;background:#fff;display:grid;place-items:center;color:#152238;font-size:25px;font-weight:900}
-.brand h1{font-size:22px;margin:0}.brand p{margin:3px 0 0;color:#91a0b6;font-size:13px}
-button,.chip{border:1px solid #20324b;background:#0d1b2e;color:#fff;border-radius:14px;padding:11px 14px;font-weight:700}
-.hero{background:linear-gradient(145deg,#122842,#091321);border:1px solid #263b55;border-radius:28px;padding:24px 20px;margin-bottom:14px;box-shadow:0 16px 40px #0004}
-.hero h2{font-size:27px;margin:0 0 10px}.hero p{color:#b4c0d1;line-height:1.9;margin:0}.live{display:inline-flex;align-items:center;gap:7px;color:#61e6b1;margin-top:14px;font-size:14px}.dot{width:10px;height:10px;background:#39d89b;border-radius:50%;box-shadow:0 0 14px #39d89b}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0 20px}.stat{background:#0c1728;border:1px solid #1d2d43;border-radius:20px;padding:16px}.stat small{color:#8997aa}.stat b{display:block;font-size:25px;margin-top:6px}
-.section{margin-top:22px}.section h3{font-size:21px;margin:0 0 10px}.card{background:#0b1728;border:1px solid #1d3047;border-radius:20px;padding:16px;margin:10px 0}.tag{display:inline-block;font-size:12px;color:#ffd58a;background:#382719;border:1px solid #6c4a2b;padding:5px 9px;border-radius:99px;margin-bottom:8px}.card h4{margin:3px 0 7px;font-size:17px}.card p{margin:0;color:#aeb9c9;line-height:1.75;font-size:14px}.card .date{color:#73849a;font-size:12px;margin-top:9px}
-.notice{background:#13233a;border-right:4px solid #f4c85b;border-radius:16px;padding:13px 14px;line-height:1.7;color:#d9e1ec}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.primary{background:#e9bd55;color:#111;border-color:#e9bd55}
-footer{position:fixed;bottom:0;left:0;right:0;background:#081321ee;backdrop-filter:blur(12px);border-top:1px solid #1d2c40}.nav{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:8px}.nav a{text-align:center;color:#9eabbd;font-size:12px;padding:8px}.nav a b{display:block;color:#f3f6fb;font-size:19px;margin-bottom:2px}
-@media(max-width:560px){.grid{grid-template-columns:1fr}.hero h2{font-size:24px}}
+*{box-sizing:border-box}body{margin:0;background:#071321;color:#f5f7fb;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial}
+.wrap{max-width:760px;margin:auto;padding:16px 14px 95px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{display:flex;align-items:center;gap:10px}.logo{width:50px;height:50px;background:#fff;border-radius:15px;display:grid;place-items:center;font-size:25px}
+h1{font-size:22px;margin:0}.sub{color:#8999ad;font-size:13px;margin-top:3px}
+button,.btn{border:1px solid #253a53;background:#0d1c2f;color:#fff;border-radius:14px;padding:10px 13px;font-weight:700}
+.hero{margin-top:16px;padding:23px 18px;border:1px solid #28415e;border-radius:26px;background:linear-gradient(145deg,#132b45,#091525)}
+.hero h2{margin:0 0 8px;font-size:26px}.hero p{margin:0;color:#b7c3d2;line-height:1.85}
+.live{margin-top:12px;color:#56e3ab;font-size:13px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#39dda1;margin-left:5px}
+.count{margin-top:15px;padding:14px;border-radius:18px;background:#07111e;border:1px solid #263b52;text-align:center}
+.count small{color:#95a4b7}.timer{display:flex;justify-content:center;gap:7px;margin-top:8px}.unit{min-width:58px;padding:8px 4px;background:#102238;border-radius:12px}.unit b{display:block;font-size:22px}.unit span{font-size:10px;color:#93a2b4}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.stat{background:#0b1727;border:1px solid #1d3047;border-radius:18px;padding:14px}.stat small{color:#8796a9}.stat b{display:block;font-size:24px;margin-top:5px}
+.search{display:flex;gap:8px;margin:18px 0 10px}.search input{flex:1;background:#0b1727;border:1px solid #24384f;color:#fff;border-radius:14px;padding:12px;font-size:15px;outline:none}
+.section{margin-top:22px}.section h3{margin:0 0 10px;font-size:20px}.card{background:#0b1727;border:1px solid #1d3047;border-radius:19px;padding:15px;margin:9px 0}.tag{display:inline-block;background:#3b2b1d;color:#ffd68a;border:1px solid #684a2c;border-radius:99px;padding:4px 8px;font-size:11px}.card h4{margin:8px 0 6px;font-size:16px}.card p{margin:0;color:#aebac9;line-height:1.7;font-size:14px}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.gold{background:#e8bd58;color:#111;border-color:#e8bd58}
+.hidden{display:none}.notice{padding:13px;border-radius:16px;background:#112238;border-right:4px solid #e8bd58;color:#d5deea;line-height:1.7}
+footer{position:fixed;bottom:0;left:0;right:0;background:#081321ee;backdrop-filter:blur(12px);border-top:1px solid #1d2c40}.nav{max-width:760px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);padding:7px}.nav a{text-align:center;color:#a5b1c0;font-size:11px;padding:7px}.nav b{display:block;font-size:18px;color:#fff}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.hero h2{font-size:23px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <div class="brand"><div class="logo">⚽</div><div><h1>eFootball Hub</h1><p>أخبار • صيانة • تحديثات • بكجات</p></div></div>
-  <button onclick="location.reload()">🔄 تحديث</button>
+<header class="top">
+<div class="brand"><div class="logo">⚽</div><div><h1>eFootball Hub</h1><div class="sub">أخبار • صيانة • تحديثات • بكجات</div></div></div>
+<button onclick="location.reload()">🔄 تحديث</button>
 </header>
 
 <section class="hero">
-  <h2>⚡ مركز eFootball الذكي V4</h2>
-  <p>صفحة مركّزة لمتابعة أخبار اللعبة والصيانة والمشاكل الرسمية والتحديثات، مع روابط مباشرة لمصدر KONAMI.</p>
-  <div class="live"><span class="dot"></span> آخر مزامنة: <span id="sync">الآن</span></div>
+<h2>⚡ مركز eFootball الذكي V5</h2>
+<p>تابع الأخبار الرسمية والصيانة والتحديثات في واجهة واحدة سريعة للجوال.</p>
+<div class="live"><span class="dot"></span> الموقع يعمل</div>
+<div class="count">
+<small>⏳ العد التنازلي للصيانة القادمة</small>
+<div class="timer">
+<div class="unit"><b id="d">--</b><span>يوم</span></div>
+<div class="unit"><b id="h">--</b><span>ساعة</span></div>
+<div class="unit"><b id="m">--</b><span>دقيقة</span></div>
+<div class="unit"><b id="s">--</b><span>ثانية</span></div>
+</div>
+</div>
 </section>
 
 <div class="grid">
-  <div class="stat"><small>الأخبار</small><b>3</b></div>
-  <div class="stat"><small>الصيانة القادمة</small><b>24/09</b></div>
-  <div class="stat"><small>الإصدار</small><b>V4</b></div>
+<div class="stat"><small>الأخبار</small><b>3</b></div>
+<div class="stat"><small>الصيانة</small><b>24/09</b></div>
+<div class="stat"><small>الإصدار</small><b>V5</b></div>
 </div>
+
+<div class="search"><input id="q" placeholder="🔎 ابحث عن خبر أو صيانة..."></div>
+
+<section class="section" id="news">
+<h3>📰 الأخبار الرسمية</h3>
+<div class="card item"><span class="tag">18 سبتمبر</span><h4>مشكلة Live Update Ratings</h4><p>مشكلة في قيم التحديث المباشر لبعض اللاعبين، مع إعلان إصلاحها في الصيانة القادمة.</p><div class="actions"><a class="btn gold" target="_blank" href="https://www.konami.com/efootball/en-us/topic/news/5872">المصدر الرسمي</a></div></div>
+<div class="card item"><span class="tag">17 سبتمبر</span><h4>تغييرات مرتبطة بالتراخيص</h4><p>معلومات رسمية حول بعض اللاعبين والمدربين والتغييرات المرتبطة بالتراخيص.</p><div class="actions"><a class="btn" target="_blank" href="https://www.konami.com/efootball/en/topic/news/5846">التفاصيل</a></div></div>
+<div class="card item"><span class="tag">14 سبتمبر</span><h4>مشكلة في نماذج بعض اللاعبين</h4><p>إعلان رسمي عن مشكلة في بعض نماذج اللاعبين ومعالجتها.</p><div class="actions"><a class="btn" target="_blank" href="https://www.konami.com/efootball/en/topic/news/5835">التفاصيل</a></div></div>
+</section>
 
 <section class="section" id="maintenance">
 <h3>🛠️ الصيانة القادمة</h3>
-<div class="card">
-<span class="tag">معلومة رسمية</span>
-<h4>24 سبتمبر 2026</h4>
-<p>بحسب موقع eFootball الرسمي، من المقرر إصلاح مشكلة قيم Live Update Ratings لبعض اللاعبين أثناء صيانة 24/09/2026.</p>
-<div class="actions"><a class="chip primary" href="https://www.konami.com/efootball/en-us/topic/news/5872" target="_blank">المصدر الرسمي</a></div>
-</div>
-</section>
-
-<section class="section" id="news">
-<h3>📰 آخر الأخبار الرسمية</h3>
-<div class="card">
-<span class="tag">18/09/2026</span>
-<h4>مشكلة في قيم Live Update Ratings</h4>
-<p>تم تأكيد مشكلة تؤثر على قيم بعض اللاعبين، وذكرت KONAMI أنها ستُصلح خلال صيانة 24/09/2026.</p>
-<a class="chip" href="https://www.konami.com/efootball/en-us/topic/news/5872" target="_blank">قراءة الخبر</a>
-</div>
-<div class="card">
-<span class="tag">17/09/2026</span>
-<h4>لاعبون ومدربون غير متاحين</h4>
-<p>أعلنت KONAMI أن بعض اللاعبين والمدربين قد يصبحون غير متاحين بسبب تغييرات التراخيص، مع تنفيذ مخطط في تحديث نوفمبر 2026 أو بعده.</p>
-<a class="chip" href="https://www.konami.com/efootball/en/topic/news/5846" target="_blank">التفاصيل</a>
-</div>
-<div class="card">
-<span class="tag">14/09/2026</span>
-<h4>مشكلة في بعض نماذج اللاعبين</h4>
-<p>أشارت KONAMI إلى تغييرات غير مقصودة في بعض نماذج اللاعبين، مع معالجة مرتبطة بالصيانة.</p>
-<a class="chip" href="https://www.konami.com/efootball/en/topic/news/5835" target="_blank">التفاصيل</a>
-</div>
+<div class="card item"><span class="tag">معلومة رسمية</span><h4>24 سبتمبر 2026</h4><p>موعد الصيانة الظاهر في الموقع مع رابط مباشر للمصدر الرسمي.</p><div class="actions"><a class="btn gold" target="_blank" href="https://www.konami.com/efootball/en-us/topic/news/5872">فتح المصدر</a></div></div>
 </section>
 
 <section class="section" id="updates">
-<h3>🔄 ماذا نضيف في V4؟</h3>
-<div class="notice">
-• قسم أخبار رسمي واضح.<br>
-• زر تحديث سريع.<br>
-• عدّاد إصدار V4.<br>
-• روابط مباشرة لمصادر KONAMI.<br>
-• تصميم أفضل للجوال.<br>
-• تجهيز الموقع لاحقًا للإشعارات التلقائية.
-</div>
+<h3>🔄 التحديث</h3>
+<div class="notice">V5 أضاف عدّاد الصيانة، البحث داخل الأخبار، تحديث سريع، وتحسينات للجوال. الإشعارات التلقائية تحتاج تشغيل صلاحية الإشعارات على الجهاز.</div>
+<div class="actions"><button class="gold" onclick="notifyMe()">🔔 تفعيل إشعار تجريبي</button></div>
 </section>
 
 <section class="section" id="source">
-<h3>🌐 المصدر</h3>
-<div class="card">
-<h4>موقع eFootball الرسمي</h4>
-<p>استخدم زر المصدر للوصول إلى معلومات KONAMI الرسمية بدل الاعتماد على الأخبار غير المؤكدة.</p>
-<a class="chip primary" href="https://www.konami.com/efootball/" target="_blank">فتح موقع eFootball</a>
-</div>
+<h3>🌐 المصدر الرسمي</h3>
+<div class="card"><p>للتأكد من أي خبر، افتح موقع eFootball الرسمي.</p><div class="actions"><a class="btn gold" target="_blank" href="https://www.konami.com/efootball/">فتح KONAMI</a></div></div>
 </section>
 </div>
 
-<footer><nav class="nav">
-<a href="#news"><b>📰</b>الأخبار</a>
-<a href="#maintenance"><b>🛠️</b>الصيانة</a>
-<a href="#updates"><b>🔄</b>التحديث</a>
-<a href="#source"><b>🌐</b>المصدر</a>
-</nav></footer>
+<footer><nav class="nav"><a href="#news"><b>📰</b>الأخبار</a><a href="#maintenance"><b>🛠️</b>الصيانة</a><a href="#updates"><b>🔄</b>التحديث</a><a href="#source"><b>🌐</b>المصدر</a></nav></footer>
+
 <script>
-document.getElementById("sync").textContent = new Date().toLocaleString("ar-YE",{hour:"2-digit",minute:"2-digit"});
+const target=new Date("2026-09-24T00:00:00+03:00").getTime();
+function tick(){let x=Math.max(0,target-Date.now());let d=Math.floor(x/86400000),h=Math.floor(x%86400000/3600000),m=Math.floor(x%3600000/60000),s=Math.floor(x%60000/1000);document.getElementById("d").textContent=d;document.getElementById("h").textContent=String(h).padStart(2,"0");document.getElementById("m").textContent=String(m).padStart(2,"0");document.getElementById("s").textContent=String(s).padStart(2,"0")} tick();setInterval(tick,1000);
+document.getElementById("q").addEventListener("input",e=>{let q=e.target.value.trim().toLowerCase();document.querySelectorAll(".item").forEach(c=>c.classList.toggle("hidden",q&&!c.innerText.toLowerCase().includes(q)))});
+function notifyMe(){if(!("Notification"in window)){alert("المتصفح لا يدعم الإشعارات.");return} Notification.requestPermission().then(p=>{if(p==="granted")new Notification("eFootball Hub",{body:"تم تفعيل الإشعارات على هذا المتصفح."});else alert("لم يتم السماح بالإشعارات.");})}
 </script>
 </body>
 </html>
