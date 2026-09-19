@@ -1,25 +1,226 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>eFootball Hub Auto</title><style>
- <script>
-localStorage.setItem(
-  "efootball_api",
-  "https://efootball-hub-1-lqrl.onrender.com"
-);
-</script>
-body{margin:0;background:#06111b;color:#fff;font-family:system-ui,Tahoma}.app{max-width:680px;margin:auto;padding:18px}.hero,.card{background:#0b1b2a;border:1px solid #284257;border-radius:20px;padding:17px;margin:10px 0}.hero{background:linear-gradient(135deg,#123a59,#091824)}h1{margin:6px 0}.muted{color:#91a5b5;font-size:13px}.tag{display:inline-block;padding:5px 9px;border-radius:20px;background:#143a56;color:#90d9ff;font-size:12px}.btn{width:100%;border:0;border-radius:13px;padding:13px;font-weight:800;margin-top:10px}.news{margin-top:10px}.news a{color:#90d9ff}.error{color:#ff9b9b}
-</style></head><body><main class="app">
-<section class="hero"><span class="tag">⚡ AUTO</span><h1>eFootball Hub</h1><p class="muted">الأخبار والصيانة والبكجات من مصادر KONAMI الرسمية.</p></section>
-<button class="btn" onclick="loadNews()">🔄 تحديث الأخبار الآن</button><p id="status" class="muted">جارٍ الاتصال...</p><section id="feed"></section>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>eFootball Hub</title>
+
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#06111b;
+      color:#fff;
+      font-family:system-ui,Tahoma,Arial,sans-serif
+    }
+    .app{
+      max-width:680px;
+      margin:auto;
+      padding:18px
+    }
+    .hero,.card{
+      background:#0b1b2a;
+      border:1px solid #284257;
+      border-radius:20px;
+      padding:17px;
+      margin:10px 0
+    }
+    .hero{
+      background:linear-gradient(135deg,#123a59,#091824)
+    }
+    h1{margin:6px 0}
+    h3{margin:10px 0}
+    .muted{
+      color:#91a5b5;
+      font-size:13px
+    }
+    .tag{
+      display:inline-block;
+      padding:5px 9px;
+      border-radius:20px;
+      background:#143a56;
+      color:#90d9ff;
+      font-size:12px
+    }
+    .btn{
+      width:100%;
+      border:0;
+      border-radius:13px;
+      padding:13px;
+      font-weight:800;
+      margin-top:10px;
+      cursor:pointer
+    }
+    .news{margin-top:10px}
+    .news a{
+      color:#90d9ff;
+      text-decoration:none
+    }
+    .error{color:#ff9b9b}
+    .success{color:#8ff0b0}
+  </style>
+</head>
+
+<body>
+
+<main class="app">
+
+  <section class="hero">
+    <span class="tag">⚡ AUTO</span>
+    <h1>eFootball Hub</h1>
+    <p class="muted">
+      الأخبار والصيانة والبكجات من مصادر KONAMI الرسمية.
+    </p>
+  </section>
+
+  <button class="btn" onclick="loadNews()">
+    🔄 تحديث الأخبار الآن
+  </button>
+
+  <p id="status" class="muted">
+    جاري الاتصال بالخادم...
+  </p>
+
+  <section id="feed"></section>
+
+</main>
+
 <script>
-const API=(localStorage.getItem("efootball_api")||"https://efootball-hub-1-lqrl.onrender.com").replace(/\/$/,"");
+/* رابط الخادم */
+const SERVER_URL =
+  "https://efootball-hub-1-lqrl.onrender.com";
+
+/* حفظ الرابط تلقائيًا */
+localStorage.setItem("efootball_api", SERVER_URL);
+
+/* تنظيف الرابط */
+const API =
+  (localStorage.getItem("efootball_api") || SERVER_URL)
+  .replace(/\/$/, "");
+
+
+/* جلب الأخبار */
 async function loadNews(){
- const s=document.getElementById("status"); const f=document.getElementById("feed");
- if(!API){s.innerHTML='<span class="error">ضع رابط الخادم أولاً في localStorage باسم efootball_api.</span>';return}
- s.textContent="جارٍ جلب آخر الأخبار...";
- try{
-  const r=await fetch(API+"/api/news"); if(!r.ok)throw Error("HTTP "+r.status);
-  const d=await r.json(); f.innerHTML="";
-  (d.items||[]).forEach(x=>{let c=document.createElement("article");c.className="card news";c.innerHTML='<span class="tag">'+(x.type==="maintenance"?"🛠️ صيانة":"📰 خبر")+'</span><h3></h3><a target="_blank">فتح الخبر الرسمي ↗</a>';c.querySelector("h3").textContent=x.title;c.querySelector("a").href=x.url;f.appendChild(c)});
-  s.textContent="آخر فحص: "+new Date(d.updatedAt).toLocaleString("ar-YE");
- }catch(e){s.innerHTML='<span class="error">تعذر الاتصال بالخادم: '+e.message+"</span>"}
+
+  const status = document.getElementById("status");
+  const feed = document.getElementById("feed");
+
+  status.className = "muted";
+  status.textContent = "جارٍ جلب آخر الأخبار...";
+
+  feed.innerHTML = "";
+
+  try{
+
+    const response =
+      await fetch(API + "/api/news", {
+        method: "GET",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+    if(!response.ok){
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    /*
+      الخادم عندنا يرجع مصفوفة مباشرة:
+      [...]
+      
+      وإذا تغير الخادم وأصبح يرجع:
+      {items:[...]}
+      
+      الكود يتعامل مع الاثنين.
+    */
+    const items =
+      Array.isArray(data)
+      ? data
+      : (Array.isArray(data.items) ? data.items : []);
+
+    if(items.length === 0){
+
+      status.className = "error";
+      status.textContent =
+        "لم يتم العثور على أخبار حاليًا.";
+
+      return;
+    }
+
+    /* عرض الأخبار */
+    items.forEach(function(item){
+
+      const card =
+        document.createElement("article");
+
+      card.className = "card news";
+
+      const tag =
+        document.createElement("span");
+
+      tag.className = "tag";
+
+      tag.textContent =
+        item.type === "maintenance"
+        ? "🛠️ صيانة"
+        : "📰 خبر";
+
+      const title =
+        document.createElement("h3");
+
+      title.textContent =
+        item.title || "خبر جديد";
+
+      const link =
+        document.createElement("a");
+
+      link.href =
+        item.url || "#";
+
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+
+      link.textContent =
+        "فتح الخبر الرسمي ↗";
+
+      card.appendChild(tag);
+      card.appendChild(title);
+      card.appendChild(link);
+
+      feed.appendChild(card);
+
+    });
+
+    status.className = "success";
+
+    status.textContent =
+      "✅ تم جلب " +
+      items.length +
+      " أخبار بنجاح";
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    status.className = "error";
+
+    status.textContent =
+      "❌ تعذر الاتصال بالخادم: " +
+      error.message;
+
+  }
+
 }
-</script></main></body></html>
+
+
+/* تشغيل الأخبار تلقائيًا عند فتح التطبيق */
+loadNews();
+
+</script>
+
+</body>
+</html>
