@@ -10,7 +10,7 @@ body{margin:0;background:#06111b;color:#fff;font-family:system-ui,Tahoma}.app{ma
 <section class="hero"><span class="tag">⚡ AUTO</span><h1>eFootball Hub</h1><p class="muted">الأخبار والصيانة والبكجات من مصادر KONAMI الرسمية.</p></section>
 <button class="btn" onclick="loadNews()">🔄 تحديث الأخبار الآن</button><p id="status" class="muted">جارٍ الاتصال...</p><section id="feed"></section>
 <script>
-const API=(localStorage.getItem("efootball_api")||"").replace(/\/$/,"");
+const API=(localStorage.getItem("efootball_api")||"https://efootball-hub-1-lqrl.onrender.com").replace(/\/$/,"");
 async function loadNews(){
  const s=document.getElementById("status"); const f=document.getElementById("feed");
  if(!API){s.innerHTML='<span class="error">ضع رابط الخادم أولاً في localStorage باسم efootball_api.</span>';return}
