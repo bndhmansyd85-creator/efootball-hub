@@ -3,61 +3,191 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>eFootball Hub</title>
+  <meta name="theme-color" content="#071522">
+  <title>eFootball Hub V2</title>
 
   <style>
     *{box-sizing:border-box}
+
     body{
       margin:0;
-      background:#06111b;
       color:#fff;
-      font-family:system-ui,Tahoma,Arial,sans-serif
+      background:
+        radial-gradient(circle at top,#123957 0,#071522 42%,#040b12 100%);
+      font-family:system-ui,Tahoma,Arial,sans-serif;
+      min-height:100vh
     }
+
+    button,a{font:inherit}
+
     .app{
-      max-width:680px;
+      width:100%;
+      max-width:760px;
       margin:auto;
-      padding:18px
+      padding:16px
     }
-    .hero,.card{
-      background:#0b1b2a;
-      border:1px solid #284257;
-      border-radius:20px;
-      padding:17px;
-      margin:10px 0
-    }
+
     .hero{
-      background:linear-gradient(135deg,#123a59,#091824)
+      padding:24px 20px;
+      border:1px solid #2c526d;
+      border-radius:25px;
+      background:linear-gradient(135deg,#174a70,#0a1c2b 75%);
+      box-shadow:0 15px 40px #0005;
+      overflow:hidden;
+      position:relative
     }
-    h1{margin:6px 0}
-    h3{margin:10px 0}
-    .muted{
-      color:#91a5b5;
-      font-size:13px
+
+    .hero:after{
+      content:"⚽";
+      position:absolute;
+      left:15px;
+      top:18px;
+      font-size:70px;
+      opacity:.12
     }
+
     .tag{
       display:inline-block;
-      padding:5px 9px;
-      border-radius:20px;
-      background:#143a56;
-      color:#90d9ff;
+      padding:5px 11px;
+      border-radius:30px;
+      color:#a9e5ff;
+      background:#1b4d70;
+      border:1px solid #3d779d;
       font-size:12px
     }
+
+    h1{
+      margin:12px 0 5px;
+      font-size:31px
+    }
+
+    h2{
+      margin:0;
+      font-size:19px
+    }
+
+    .muted{
+      color:#9bb0bf;
+      font-size:13px;
+      line-height:1.8
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:9px;
+      margin:13px 0
+    }
+
+    .stat{
+      padding:13px 7px;
+      text-align:center;
+      border:1px solid #25465b;
+      border-radius:17px;
+      background:#0b1b2a
+    }
+
+    .stat strong{
+      display:block;
+      font-size:23px;
+      color:#8fddff
+    }
+
+    .stat span{
+      font-size:12px;
+      color:#9bb0bf
+    }
+
+    .panel{
+      margin:12px 0;
+      padding:17px;
+      border:1px solid #25465b;
+      border-radius:21px;
+      background:#091a28e8;
+      box-shadow:0 8px 25px #0002
+    }
+
+    .panel-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:12px
+    }
+
     .btn{
       width:100%;
       border:0;
-      border-radius:13px;
-      padding:13px;
-      font-weight:800;
+      border-radius:14px;
+      padding:14px;
       margin-top:10px;
+      color:#fff;
+      background:linear-gradient(135deg,#147bb1,#10547b);
+      font-weight:800;
       cursor:pointer
     }
-    .news{margin-top:10px}
-    .news a{
-      color:#90d9ff;
-      text-decoration:none
+
+    .btn:active{
+      transform:scale(.98)
     }
-    .error{color:#ff9b9b}
-    .success{color:#8ff0b0}
+
+    .btn.secondary{
+      background:#122d40;
+      border:1px solid #31556c
+    }
+
+    .status{
+      padding:11px 13px;
+      margin-top:12px;
+      border-radius:13px;
+      background:#07131e;
+      color:#9bb0bf;
+      font-size:13px
+    }
+
+    .success{color:#91f2b0}
+    .error{color:#ffaaaa}
+
+    .news-card{
+      padding:15px;
+      margin:10px 0;
+      border:1px solid #29495e;
+      border-radius:17px;
+      background:linear-gradient(135deg,#10283a,#0a1825)
+    }
+
+    .news-card h3{
+      margin:9px 0;
+      font-size:16px;
+      line-height:1.7
+    }
+
+    .news-card a{
+      display:inline-block;
+      color:#8fddff;
+      text-decoration:none;
+      font-size:13px;
+      margin-top:5px
+    }
+
+    .empty{
+      text-align:center;
+      color:#91a5b5;
+      padding:25px 5px
+    }
+
+    .footer{
+      text-align:center;
+      color:#718b9d;
+      font-size:12px;
+      padding:18px 0
+    }
+
+    @media(max-width:430px){
+      h1{font-size:27px}
+      .app{padding:11px}
+      .panel{padding:13px}
+    }
   </style>
 </head>
 
@@ -66,160 +196,337 @@
 <main class="app">
 
   <section class="hero">
-    <span class="tag">⚡ AUTO</span>
+    <span class="tag">⚡ AUTO • V2</span>
     <h1>eFootball Hub</h1>
     <p class="muted">
-      الأخبار والصيانة والبكجات من مصادر KONAMI الرسمية.
+      مركز أخبار eFootball والصيانة والبكجات من المصادر الرسمية.
     </p>
   </section>
 
-  <button class="btn" onclick="loadNews()">
-    🔄 تحديث الأخبار الآن
-  </button>
+  <section class="grid">
+    <div class="stat">
+      <strong id="newsCount">0</strong>
+      <span>الأخبار</span>
+    </div>
 
-  <p id="status" class="muted">
-    جاري الاتصال بالخادم...
-  </p>
+    <div class="stat">
+      <strong id="maintenanceCount">0</strong>
+      <span>الصيانة</span>
+    </div>
 
-  <section id="feed"></section>
+    <div class="stat">
+      <strong id="updateCount">0</strong>
+      <span>التحديثات</span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>📰 آخر الأخبار</h2>
+      <span class="tag">LIVE</span>
+    </div>
+
+    <button class="btn" onclick="loadNews()">
+      🔄 تحديث الأخبار الآن
+    </button>
+
+    <div id="status" class="status">
+      جارٍ الاتصال بالخادم...
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>🛠️ الصيانة والتحديثات</h2>
+    </div>
+
+    <div id="maintenanceFeed">
+      <div class="empty">سيتم عرض أخبار الصيانة هنا.</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>🎁 البكجات واللاعبون</h2>
+    </div>
+
+    <div id="packsFeed">
+      <div class="empty">سيتم عرض أخبار البكجات هنا.</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2>📚 جميع الأخبار</h2>
+    </div>
+
+    <div id="feed">
+      <div class="empty">جارٍ جلب الأخبار...</div>
+    </div>
+  </section>
+
+  <div class="footer">
+    eFootball Hub V2<br>
+    الأخبار من روابط المصادر الرسمية
+  </div>
 
 </main>
 
 <script>
-/* رابط الخادم */
-const SERVER_URL =
-  "https://efootball-hub-1-lqrl.onrender.com";
+  const SERVER_URL =
+    "https://efootball-hub-1-lqrl.onrender.com";
 
-/* حفظ الرابط تلقائيًا */
-localStorage.setItem("efootball_api", SERVER_URL);
+  localStorage.setItem("efootball_api", SERVER_URL);
 
-/* تنظيف الرابط */
-const API =
-  (localStorage.getItem("efootball_api") || SERVER_URL)
-  .replace(/\/$/, "");
+  const API =
+    (localStorage.getItem("efootball_api") || SERVER_URL)
+    .replace(/\/$/, "");
+
+  const statusBox =
+    document.getElementById("status");
+
+  const feed =
+    document.getElementById("feed");
+
+  const maintenanceFeed =
+    document.getElementById("maintenanceFeed");
+
+  const packsFeed =
+    document.getElementById("packsFeed");
+
+  const newsCount =
+    document.getElementById("newsCount");
+
+  const maintenanceCount =
+    document.getElementById("maintenanceCount");
+
+  const updateCount =
+    document.getElementById("updateCount");
 
 
-/* جلب الأخبار */
-async function loadNews(){
+  function showStatus(message, type){
 
-  const status = document.getElementById("status");
-  const feed = document.getElementById("feed");
+    statusBox.textContent = message;
+    statusBox.className = "status " + (type || "");
 
-  status.className = "muted";
-  status.textContent = "جارٍ جلب آخر الأخبار...";
+  }
 
-  feed.innerHTML = "";
 
-  try{
+  function createNewsCard(item){
 
-    const response =
-      await fetch(API + "/api/news", {
-        method: "GET",
-        headers: {
-          "Accept": "application/json"
-        }
-      });
+    const card =
+      document.createElement("article");
 
-    if(!response.ok){
-      throw new Error("HTTP " + response.status);
+    card.className = "news-card";
+
+    const tag =
+      document.createElement("span");
+
+    tag.className = "tag";
+
+    const type =
+      String(item.type || "news").toLowerCase();
+
+    if(type.includes("maintenance")){
+      tag.textContent = "🛠️ صيانة";
+    }else if(
+      type.includes("pack") ||
+      type.includes("player")
+    ){
+      tag.textContent = "🎁 بكجات ولاعبون";
+    }else if(type.includes("update")){
+      tag.textContent = "🔄 تحديث";
+    }else{
+      tag.textContent = "📰 خبر رسمي";
     }
 
-    const data = await response.json();
+    const title =
+      document.createElement("h3");
 
-    /*
-      الخادم عندنا يرجع مصفوفة مباشرة:
-      [...]
-      
-      وإذا تغير الخادم وأصبح يرجع:
-      {items:[...]}
-      
-      الكود يتعامل مع الاثنين.
-    */
-    const items =
-      Array.isArray(data)
-      ? data
-      : (Array.isArray(data.items) ? data.items : []);
+    title.textContent =
+      item.title || "خبر جديد";
 
-    if(items.length === 0){
+    card.appendChild(tag);
+    card.appendChild(title);
 
-      status.className = "error";
-      status.textContent =
-        "لم يتم العثور على أخبار حاليًا.";
-
-      return;
-    }
-
-    /* عرض الأخبار */
-    items.forEach(function(item){
-
-      const card =
-        document.createElement("article");
-
-      card.className = "card news";
-
-      const tag =
-        document.createElement("span");
-
-      tag.className = "tag";
-
-      tag.textContent =
-        item.type === "maintenance"
-        ? "🛠️ صيانة"
-        : "📰 خبر";
-
-      const title =
-        document.createElement("h3");
-
-      title.textContent =
-        item.title || "خبر جديد";
+    if(item.url){
 
       const link =
         document.createElement("a");
 
-      link.href =
-        item.url || "#";
-
+      link.href = item.url;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
+      link.textContent = "فتح الخبر الرسمي ↗";
 
-      link.textContent =
-        "فتح الخبر الرسمي ↗";
-
-      card.appendChild(tag);
-      card.appendChild(title);
       card.appendChild(link);
 
-      feed.appendChild(card);
+    }
+
+    return card;
+
+  }
+
+
+  function renderList(container, items, emptyText){
+
+    container.innerHTML = "";
+
+    if(!items.length){
+
+      const empty =
+        document.createElement("div");
+
+      empty.className = "empty";
+      empty.textContent = emptyText;
+
+      container.appendChild(empty);
+      return;
+
+    }
+
+    items.forEach(function(item){
+
+      container.appendChild(
+        createNewsCard(item)
+      );
 
     });
 
-    status.className = "success";
+  }
 
-    status.textContent =
-      "✅ تم جلب " +
-      items.length +
-      " أخبار بنجاح";
+
+  async function loadNews(){
+
+    showStatus("جارٍ جلب آخر الأخبار...", "");
+
+    feed.innerHTML =
+      '<div class="empty">جارٍ التحميل...</div>';
+
+    try{
+
+      const response =
+        await fetch(API + "/api/news", {
+          method:"GET",
+          headers:{
+            "Accept":"application/json"
+          }
+        });
+
+      if(!response.ok){
+
+        throw new Error(
+          "HTTP " + response.status
+        );
+
+      }
+
+      const data =
+        await response.json();
+
+      const items =
+        Array.isArray(data)
+        ? data
+        : (
+          Array.isArray(data.items)
+          ? data.items
+          : []
+        );
+
+      const maintenance =
+        items.filter(function(item){
+
+          const type =
+            String(item.type || "").toLowerCase();
+
+          const title =
+            String(item.title || "").toLowerCase();
+
+          return type.includes("maintenance") ||
+                 title.includes("صيانة") ||
+                 title.includes("maintenance");
+
+        });
+
+      const packs =
+        items.filter(function(item){
+
+          const type =
+            String(item.type || "").toLowerCase();
+
+          const title =
+            String(item.title || "").toLowerCase();
+
+          return type.includes("pack") ||
+                 type.includes("player") ||
+                 title.includes("بكج") ||
+                 title.includes("لاعب");
+
+        });
+
+      const updates =
+        items.filter(function(item){
+
+          const title =
+            String(item.title || "").toLowerCase();
+
+          return title.includes("تحديث") ||
+                 title.includes("update");
+
+        });
+
+      newsCount.textContent =
+        items.length;
+
+      maintenanceCount.textContent =
+        maintenance.length;
+
+      updateCount.textContent =
+        updates.length;
+
+      renderList(
+        feed,
+        items,
+        "لا توجد أخبار حاليًا."
+      );
+
+      renderList(
+        maintenanceFeed,
+        maintenance,
+        "لا توجد أخبار صيانة حاليًا."
+      );
+
+      renderList(
+        packsFeed,
+        packs,
+        "لا توجد أخبار بكجات أو لاعبين حاليًا."
+      );
+
+      showStatus(
+        "✅ تم جلب " + items.length + " أخبار بنجاح",
+        "success"
+      );
+
+    }catch(error){
+
+      console.error(error);
+
+      showStatus(
+        "❌ تعذر الاتصال بالخادم: " + error.message,
+        "error"
+      );
+
+      feed.innerHTML =
+        '<div class="empty">تعذر عرض الأخبار. اضغط تحديث وحاول مرة أخرى.</div>';
+
+    }
 
   }
 
-  catch(error){
 
-    console.error(error);
+  loadNews();
 
-    status.className = "error";
-
-    status.textContent =
-      "❌ تعذر الاتصال بالخادم: " +
-      error.message;
-
-  }
-
-}
-
-
-/* تشغيل الأخبار تلقائيًا عند فتح التطبيق */
-loadNews();
-
+  setInterval(loadNews, 300000);
 </script>
 
 </body>
